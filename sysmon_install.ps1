@@ -34,7 +34,8 @@ if (Test-Path -Path $sysinternals_folder) {
     } else {
     Invoke-Command {reg.exe ADD HKCU\Software\Sysinternals /v EulaAccepted /t REG_DWORD /d 1 /f}
     Invoke-Command {reg.exe ADD HKU\.DEFAULT\Software\Sysinternals /v EulaAccepted /t REG_DWORD /d 1 /f}
-    Start-Process -FilePath $sysinternals_folder\Sysmon64.exe -Argumentlist @("-i", "-n", "$sysinternals_folder\$sysmonconfig_file")
+    cd $sysinternals_folder
+    Start-Process -FilePath "Sysmon64.exe" -Argumentlist @("-i", "-n", "sysmonconfig.xml")
     }
     }
     Catch
