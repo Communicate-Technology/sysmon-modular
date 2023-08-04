@@ -27,14 +27,14 @@ if (Test-Path -Path $sysinternals_folder) {
     Invoke-WebRequest -Uri $sysinternals_downloadlink -OutFile $OutPath\$output
     Expand-Archive -path $OutPath\$output -destinationpath $sysinternals_folder
     Start-Sleep -s 10
-    Invoke-WebRequest -Uri $sysmonconfig_downloadlink -OutFile $OutPath\$sysmonconfig_file
+    Invoke-WebRequest -Uri $sysmonconfig_downloadlink -OutFile $sysinternals_folder\$sysmonconfig_file
     $serviceName = 'Sysmon64'
     If (Get-Service $serviceName -ErrorAction SilentlyContinue) {
     write-host ('Sysmon Is Already Installed')
     } else {
     Invoke-Command {reg.exe ADD HKCU\Software\Sysinternals /v EulaAccepted /t REG_DWORD /d 1 /f}
     Invoke-Command {reg.exe ADD HKU\.DEFAULT\Software\Sysinternals /v EulaAccepted /t REG_DWORD /d 1 /f}
-    Start-Process -FilePath $sysinternals_folder\Sysmon64.exe -Argumentlist @("-i", "-n", "$OutPath\$sysmonconfig_file")
+    Start-Process -FilePath $sysinternals_folder\Sysmon64.exe -Argumentlist @("-i", "-n", "$sysinternals_folder\$sysmonconfig_file")
     }
     }
     Catch
