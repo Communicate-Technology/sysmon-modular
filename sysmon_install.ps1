@@ -1,9 +1,9 @@
 $sysinternals_repo = 'download.sysinternals.com'
 $sysinternals_downloadlink = 'https://download.sysinternals.com/files/Sysmon.zip'
 $sysinternals_folder = 'C:\Program Files\sysinternals'
-$sysinternals_zip = 'SysinternalsSuite.zip'
-$sysmonconfig_downloadlink = 'https://raw.githubusercontent.com/olafhartong/sysmon-modular/master/sysmonconfig.xml'
-$sysmonconfig_file = 'sysmonconfig-export.xml'
+$sysinternals_zip = 'Sysmon.zip'
+$sysmonconfig_downloadlink = 'https://raw.githubusercontent.com/Communicate-Technology/sysmon-modular/master/sysmonconfig.xml'
+$sysmonconfig_file = 'sysmonconfig.xml'
 
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
@@ -23,7 +23,7 @@ if (Test-Path -Path $sysinternals_folder) {
   if ($connectreult.TcpTestSucceeded -eq $true){
     Try
     {
-    write-host ('Downloading and copying Sysinternals Tools to C:\Program Files\sysinternals...')
+    write-host ('Downloading and copying Sysmon to C:\Program Files\sysinternals...')
     Invoke-WebRequest -Uri $sysinternals_downloadlink -OutFile $OutPath\$output
     Expand-Archive -path $OutPath\$output -destinationpath $sysinternals_folder
     Start-Sleep -s 10
