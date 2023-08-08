@@ -545,6 +545,7 @@
         <Image condition="is">C:\Program Files (x86)\Sophos\AutoUpdate\ALsvc.exe</Image>
         <Image condition="is">C:\Program Files (x86)\Sophos\Sophos Anti-Virus\SAVAdminService.exe</Image>
         <Image condition="is">C:\Program Files (x86)\Sophos\Remote Management System\ManagementAgentNT.exe</Image>
+        <Image condition="is">C:\Program Files (x86)\ossec-agent\wazuh-agent.exe</Image>
         <Image condition="begin with">C:\Program Files\Splunk\bin\</Image>
         <ParentImage condition="is">C:\Program Files\Splunk\bin\splunkd.exe</ParentImage>
         <ParentImage condition="is">C:\Program Files\Splunk\bin\splunk.exe</ParentImage>
