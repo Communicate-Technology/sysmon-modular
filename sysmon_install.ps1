@@ -33,7 +33,7 @@ if (Test-Path -Path $sysinternals_folder) {
     write-host ('Sysmon Is Already Installed')
     } else {
     Start-Process -FilePath $sysinternals_folder\Sysmon64.exe -Argumentlist @("-accepteula", "-i", "-l", "-n", "$OutPath\$sysmonconfig_file")
-	Restart-Service -Name wazuh
+    Restart-Service -Name wazuh
     }
     }
     Catch
