@@ -1991,8 +1991,13 @@
           <EventType>CreatePipe</EventType>
         </Rule>
         <PipeName name="technique_id=T1021.002,technique_name=SMB/Windows Admin Shares" condition="begin with">\atsvc</PipeName>
+        <PipeName name="technique_id=T1021.002,technique_name=SMB/Windows Admin Shares" condition="begin with">atsvc</PipeName>
         <Rule groupRelation="and">
           <PipeName name="technique_id=T1021.002,technique_name=SMB/Windows Admin Shares" condition="begin with">\msse-</PipeName>
+          <PipeName name="technique_id=T1021.002,technique_name=SMB/Windows Admin Shares" condition="end with">-server</PipeName>
+        </Rule>
+        <Rule groupRelation="and">
+          <PipeName name="technique_id=T1021.002,technique_name=SMB/Windows Admin Shares" condition="begin with">msse-</PipeName>
           <PipeName name="technique_id=T1021.002,technique_name=SMB/Windows Admin Shares" condition="end with">-server</PipeName>
         </Rule>
         <PipeName name="technique_id=T1021.002,technique_name=SMB/Windows Admin Shares" condition="begin with">\msagent_</PipeName>
@@ -2002,20 +2007,41 @@
         <PipeName name="technique_id=T1021.002,technique_name=SMB/Windows Admin Shares" condition="begin with">\gruntsvc</PipeName>
         <PipeName name="technique_id=T1021.002,technique_name=SMB/Windows Admin Shares" condition="begin with">\svcctl</PipeName>
         <PipeName name="technique_id=T1021.002,technique_name=SMB/Windows Admin Shares" condition="begin with">\msf-pipe</PipeName>
+        <PipeName name="technique_id=T1021.002,technique_name=SMB/Windows Admin Shares" condition="begin with">msagent_</PipeName>
+        <PipeName name="technique_id=T1055; Possible Cobalt Strike post-exploitation jobs." condition="begin with">postex_</PipeName>
+        <PipeName name="technique_id=T1021.004,technique_name=Remote Services: SSH" condition="begin with">postex_ssh_</PipeName>
+        <PipeName name="technique_id=T1021.002,technique_name=SMB/Windows Admin Shares" condition="begin with">status_</PipeName>
+        <PipeName name="technique_id=T1021.002,technique_name=SMB/Windows Admin Shares" condition="begin with">gruntsvc</PipeName>
+        <PipeName name="technique_id=T1021.002,technique_name=SMB/Windows Admin Shares" condition="begin with">svcctl</PipeName>
+        <PipeName name="technique_id=T1021.002,technique_name=SMB/Windows Admin Shares" condition="begin with">msf-pipe</PipeName>
         <Rule groupRelation="and">
           <PipeName name="technique_id=T1059.001,technique_name=PowerShell" condition="begin with">\PSHost</PipeName>
+          <Image condition="is not">powershell.exe</Image>
+        </Rule>
+        <Rule groupRelation="and">
+          <PipeName name="technique_id=T1059.001,technique_name=PowerShell" condition="begin with">PSHost</PipeName>
           <Image condition="is not">powershell.exe</Image>
         </Rule>
         <Rule groupRelation="and">
           <PipeName name="technique_id=T1059.001,technique_name=PowerShell" condition="begin with">\PSHost</PipeName>
           <Image condition="is not">powershell_ise.exe</Image>
         </Rule>
+        <Rule groupRelation="and">
+          <PipeName name="technique_id=T1059.001,technique_name=PowerShell" condition="begin with">PSHost</PipeName>
+          <Image condition="is not">powershell_ise.exe</Image>
+        </Rule>
         <PipeName name="technique_id=T1021.002,technique_name=SMB/Windows Admin Shares" condition="begin with">\PSEXESVC</PipeName>
         <PipeName name="technique_id=T1049,technique_name=System Network Connections Discovery" condition="begin with">\srvsvc</PipeName>
+        <PipeName name="technique_id=T1021.002,technique_name=SMB/Windows Admin Shares" condition="begin with">PSEXESVC</PipeName>
+        <PipeName name="technique_id=T1049,technique_name=System Network Connections Discovery" condition="begin with">srvsvc</PipeName>
         <Rule groupRelation="and">
           <PipeName condition="begin with">\TSVCPIPE</PipeName>
         </Rule>
+        <Rule groupRelation="and">
+          <PipeName condition="begin with">TSVCPIPE</PipeName>
+        </Rule>
         <PipeName name="technique_id=T1033,technique_name=System Owner/User Discovery" condition="begin with">\winreg</PipeName>
+        <PipeName name="technique_id=T1033,technique_name=System Owner/User Discovery" condition="begin with">winreg</PipeName>
       </PipeEvent>
     </RuleGroup>
     <!-- Event ID 17,18 == PipeEvent. Log Named pipe created & Named pipe connected - Excludes -->
