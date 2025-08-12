@@ -31,16 +31,21 @@ try { Log-Message "Starting script execution."
     if ($sysmonService -and $sysmonService.Status -eq 'Running') {
         Log-Message "Sysmon service is already running. Skipping installation."
     } else {
-        Log-Message "Downloading Sysmon installation script..."
-        Invoke-WebRequest -Uri https://raw.githubusercontent.com/Communicate-Technology/sysmon-modular/master/sysmon_install.ps1 -OutFile "$tempDir\sysmon_install.ps1"
-        Log-Message "Running Sysmon installation script..."
+        Log-Message "Checking if Sysinternals folder exists..."
+        if (Test-Path -Path "$env:ProgramFiles\Sysinternals") {
+            Log-Message "Sysinternals folder already exists. Skipping installation."
+        } else {
+            Log-Message "Downloading Sysmon installation script..."
+            Invoke-WebRequest -Uri https://raw.githubusercontent.com/Communicate-Technology/sysmon-modular/master/sysmon_install.ps1 -OutFile "$tempDir\sysmon_install.ps1"
+            Log-Message "Running Sysmon installation script..."
 
-        try {
-            powershell -ep Bypass "$tempDir\sysmon_install.ps1"
-        } catch {
-            Log-Message "Failed to run Sysmon installation script: $_" -severity "ERROR"
-            $successCode = 0
-            throw
+            try {
+                powershell -ep Bypass "$tempDir\sysmon_install.ps1"
+            } catch {
+                Log-Message "Failed to run Sysmon installation script: $_" -severity "ERROR"
+                $successCode = 0
+                throw
+            }
         }
     }
 
