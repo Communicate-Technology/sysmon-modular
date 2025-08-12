@@ -2,7 +2,7 @@ $tempDir = "$env:TEMP"
 
 function Log-Message { param ( [string]$message, [string]$severity = "INFO" ) Write-Output "[$severity] $message" }
 
-$successCode = 1
+$successCode = 0  # Initialize as failure
 
 [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12
 
@@ -20,7 +20,6 @@ try { Log-Message "Starting script execution."
         NET START WazuhSvc
     } catch {
         Log-Message "Failed to start Wazuh service: $_" -severity "ERROR"
-        $successCode = 0
         throw
     }
 
@@ -43,7 +42,6 @@ try { Log-Message "Starting script execution."
                 powershell -ep Bypass "$tempDir\sysmon_install.ps1"
             } catch {
                 Log-Message "Failed to run Sysmon installation script: $_" -severity "ERROR"
-                $successCode = 0
                 throw
             }
         }
@@ -52,4 +50,5 @@ try { Log-Message "Starting script execution."
     Log-Message "Sysmon installation completed successfully."
 
     Log-Message "Script execution completed successfully." -severity "SUCCESS"
-} catch { Log-Message "An error occurred: $_" -severity "ERROR" $successCode = 0 throw } finally { Write-Output "Exit code: $successCode" }
+    $successCode = 1
+} catch { Log-Message "An error occurred: $_" -severity "ERROR" throw } finally { Write-Output "Exit code: $successCode" }
